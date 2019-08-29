@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Skeleton application demoing Heroku and Flask integration.">
+    <meta name="author" content="@gotoariel">
+    <!-- <link rel="icon" href="favicon.ico"> -->
+
+    <title>Just say you won't let go.</title>
+	
+	
+	<!-- For Vega embed-->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@3.3.0"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@4"></script>
+	
+		
+	<!-- For AJAX-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<script src="{{ url_for('static', filename='js/form.js') }}"></script>
+	
+	<!-- For google map -->
+	<style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 600px;  /* The height is 400 pixels */
+        width: 600px;  /* The width is the width of the web page */
+       }
+    </style>
+
+	
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-left">
+          <h2>NYC check-in predictions</h2>
+          <ul>
+         
+	
+	<div class="container">
+		<br><br><br><br>
+		<form class="form-inline">
+			
+			<div class="form-group">
+				<label class="sr-only" for="zipInput">Zipcode</label>
+				<input type="text" class="form-control" id="zipInput" placeholder="Zipcode">
+							
+			</div>
+			<div class="form-group">
+				<label class="sr-only" for="lat">Latitude</label>
+				<input type="text" class="form-control" id="lat" placeholder="Lat">
+			
+				
+			</div>
+			<div class="form-group">
+				<label class="sr-only" for="lng">Longitude</label>
+				<input type="text" class="form-control" id="lng" placeholder="Lng">
+				
+			</div>
+			
+			
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+		<br>
+		<div id="successAlert" class="alert alert-light" role="alert" style="display:none;"></div>
+		<div id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></div>
+	</div>
+		
+	<form id='map_info' method='post' action='map_show' >
+		 <p>
+			<input type='submit' name = 'button_map' value='Show full map' \> <!-- value is the text that will appear on the button. -->
+		</p>
+	</form>
+          </ul>
+        </div>
+      </div>
+    </div>
+	
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	
+	
+	<form id='predict_input' method='post' action='predict_action' > <!-- action is the URL you want to move to next-->
+		<p>
+		ZIPCODE: <input type='text' name='zipcode' />
+		</p>
+		<div class="form-group">
+				<label class="sr-only" for="lng">Longitude</label>
+				<input type="text" class="form-control" id="lng" placeholder="Lng">
+				
+			</div>
+		<p>
+		Latitude: <input type='text' name='lat' id="lat" placeholder="Lat" />
+		</p>
+		<p>
+		Longitude: <input type='text' name='lng' id="lng" placeholder="Lng" />
+		</p>
+		<p>
+		<input type='submit' name = 'button_1' value='Predict!' /> <!-- value is the text that will appear on the button. -->
+		</p>
+	</form>
+		<h3>You will have {{num}} check-ins today!<h3>
+		
+		
+  	<embed src="/static/ctplot_nyc.html" width="600" height="600">
+
+	
+	<h3>Pick the location from the map</h3>
+		<!--The div element for the map -->
+		
+	
+	
+	<div id="map"></div>
+	
+	<form action="">
+		<input type="hidden" name="Lat" id="lat">
+		<input type="hidden" name="Lng" id="lng">
+	
+	
+		<script>
+			// Initialize and add the map
+			function initMap() {
+			// The location of Uluru
+			var nyc_loc = {lat:40.735772, lng: -73.990587};
+			// The map, centered at Uluru
+			var map = new google.maps.Map(
+			document.getElementById('map'), {zoom: 13, center: nyc_loc});
+			// The marker, positioned at Uluru
+			var marker = new google.maps.Marker({position: nyc_loc, map: map,draggable: true});
+		
+			//dragend event of maker
+			google.maps.event.addListener(marker, 'dragend', function(){
+			
+				console.log(marker.getPosition().lat());
+				console.log(marker.getPosition().lng());
+				
+				var lat = marker.getPosition().lat();
+				var lng = marker.getPosition().lng();
+				
+				document.getElementById("lat").value = marker.getPosition().lat();
+				document.getElementById("lng").value = marker.getPosition().lng();
+				
+			});
+		
+		
+		
+		
+			}
+			
+			
+		</script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+		<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiaVjpmPPlPD_eYK6C6FhJOZ69q9xHLT4&callback=initMap">
+		</script>
+		
+	
+	<div id='vis'></div>
+		<script>
+		var spec = "static/diam_chart.json";
+		vegaEmbed("#vis", spec);
+		</script>
+		<!--
+	<div id='vis2'></div>
+		<script>
+		var spec2 = "static/ctplot_nyc.json";
+		vegaEmbed("#vis2", spec2);
+		</script>
+	-->
+	
+  </body>
+</html>
