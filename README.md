@@ -1,3 +1,12 @@
+# NYC Check-in Prediction
+
+The objective of this project is to leverage New York City open data to predict visitor popularity and project business traffic in each NYC zip code area. 
+
+The app is designed for small business, mobile food trucks and other venus to estimate customer volume and make business decisions. Local business vendors could leverage the prediction for decision making, optimizing staff shift and allocating resource.
+
+
+
+
 # Flask on Heroku
 
 This project is intended to help you tie together some important concepts and
