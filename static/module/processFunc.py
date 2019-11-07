@@ -123,7 +123,7 @@ def get_weather_data(lat='40.761440',lng='-73.981806'):
     Input: a pair of coordinate lat,long
     return the the weather of target location.
     """
-    key ='3e7fed9d10f93dc0d63701b5ad95da27'
+    key ='********************************'
     x = pd.DataFrame()
     unix_now = int((dt.datetime.now()- dt.datetime(1970,1,1)).total_seconds())
     for time in range(unix_now-86400, unix_now+604800, 86400):
