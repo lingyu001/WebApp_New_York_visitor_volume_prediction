@@ -6,21 +6,6 @@ import static.module.processFunc as proc
 import static.module.predictFunc as pred
 
 
-# import numpy as np
-# from shapely.geometry import Point
-# import geopandas as gpd
-# import requests as rq
-# import json
-# from pandas.io.json import json_normalize
-# import datetime as dt
-
-# import dill
-# from sklearn.pipeline import Pipeline
-# from sklearn.preprocessing import OneHotEncoder
-# from sklearn_pandas import DataFrameMapper
-# from sklearn.ensemble import RandomForestRegressor
-
-
 ## Input resource data        
 checkin_trip = pd.read_csv('static/checkin_trip_0828.csv')
 checkin_trip.drop('Unnamed: 0',axis=1,inplace=True)
@@ -28,15 +13,6 @@ checkin_trip.drop('Unnamed: 0',axis=1,inplace=True)
 today = dt.datetime.now().strftime('%Y/%m/%d')
 date_pred,month_pred,day_pred = proc.get_date_pred()
 weather_pred = proc.get_weather_data()
-# rfr_pipe = dill.load(open('static/rfr_pipe.dill', 'rb'))
-# gpd_zip = dill.load(open('static/gpd_zip.dill', 'rb'))
-
-## Get date and weather
-# date_now = dt.datetime.now()
-# date_pred = [date_now - dt.timedelta(days=1)+dt.timedelta(days=i) for i in range(8)]
-# month_pred = [item.month for item in date_pred]
-# day_pred = [item.day for item in date_pred]
-
 
 
 
@@ -80,17 +56,11 @@ def predict_action():
         try:
             app.vars['lat_input'] = lat = float(request.form['lat'])
             app.vars['lng_input'] = lng = float(request.form['lng'])
-            # lnglat_input = [lng,lat]
+
         except:
             return render_template('404.html')
             
-    # if (request.form['lat'] and request.form['lng']):
-        # try:
-            # app.vars['lat_input'] = lat = float(request.form['lat'])
-            # app.vars['lng_input'] = lng = float(request.form['lng'])
-            # lnglat_input = [lng,lat]
-        # except:
-            # pass
+
             
     zip_input = proc.verify_zip(zip,[lng,lat])
          
