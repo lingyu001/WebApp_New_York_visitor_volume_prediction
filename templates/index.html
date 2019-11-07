@@ -258,7 +258,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="col-md-8 market-update-left">
 						<h3>{{checkin_num}}</h3>
 						<h4>Visitor Check-Ins</h4>
-						<p>Popularity</p>
+						<p>Today</p>
 					</div>
 					<div class="col-md-4 market-update-right">
 						<i class="fa fa-file-text-o"> </i>
@@ -284,7 +284,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="col-md-8 market-update-left">
 						<h3>{{temp}} °F</h3>
 						<h4>{{weather_icon}}</h4>
-						<p>Weather</p>
+						<p>{{date}}</p>
 					</div>
 					
 				  <div class="clearfix"> </div>
@@ -326,13 +326,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<!-- <div id="successAlert" class="alert alert-light" role="alert" style="display:none;"></div> -->
 		<!-- <div id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></div> -->
 	<!-- </div>		 -->
+	
 	<div class="container">
-		
 		<form id='predict_input' method='post' action='predict_action' > 
 			<form class="form-inline">
 			
 				<br>			
 				<div class="form-group">
+				<h4>Target your Spot from the MAP below or Type your ZIPCODE</h4>
 					<label class="sr-only" for="zipInput">Zipcode</label>
 					<input type="text" id="zipInput" placeholder="Zipcode" name = 'zip'>
 					
@@ -344,19 +345,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					
 					<input type='submit' name = 'button_1' value='Predict!' class="btn btn-default" /> 
 					
-				</div>
-						
-				
-				
+				</div>				
 			</form>
 		</form>
 	</div>		
-	
 <div class="chit-chat-layer1">
 	<div class="col-md-6 chit-chat-layer1-left">
               <div class="work-progres">
                         <div class="chit-chat-heading">
-                            Select Location	
+                            Drag the Marker to Target Your Location  {{zipdisplay}}
                         </div>   
 					<div id="map"></div>
 			</div>
@@ -403,7 +400,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       <div class="col-md-6 chart-layer1-left"> 
 			<div class="glocy-chart">
 			<div class="span-2c">  
-                        <h3 class="tlt">Check-in Trends for Next Week</h3>
+                        <h3 class="tlt">Watch the Check-ins Next Week for {{zipdisplay}} Area</h3>
                         <canvas id="bar" height="300" width="400" style="width: 400px; height: 300px;"></canvas>
                        	<script>
 						 var barChartData = {
@@ -463,7 +460,7 @@ vegaEmbed("#vis", spec);
 				<span class="malorum-pro"> </span>
 			     <h4>Data Scientist</h4>
 				 <h2>Lingyu Li</h2>
-				<p>But I must explain to you data could never explain things without understanding what it is.</p>
+				<p>It's meaningless without a good question, or a good understanding.</p>
 				<ul class="malorum-icons">
 					<li><a href="#"><i class="fa fa-facebook"> </i>
 						<div class="tooltip"><span>Facebook</span></div>
@@ -652,43 +649,44 @@ vegaEmbed("#vis", spec);
 			  </a> </div>		  
 		    <div class="menu">
 		      <ul id="menu" >
-		        <li id="menu-home" ><a href="index.html"><i class="fa fa-tachometer"></i><span>Dashboard</span></a></li>
-		        <li><a href="#"><i class="fa fa-cogs"></i><span>Components</span><span class="fa fa-angle-right" style="float: right"></span></a>
+		        <li id="menu-home" ><a href="/"><i class="fa fa-tachometer"></i><span>Dashboard</span></a></li>
+		        <li><a href="#"><i class="fa fa-cogs"></i><span>The Model</span><span class="fa fa-angle-right" style="float: right"></span></a>
 		          <ul>
-		            <li><a href="grids.html">Grids</a></li>
-		            <li><a href="portlet.html">Portlets</a></li>		            
+		            <li><a href="https://sites.google.com/site/yangdingqi/home/foursquare-dataset?authuser=0">Foursquare Data</a></li>
+		            <li><a href="https://medium.com/datadriveninvestor/random-forest-regression-9871bc9a25eb">Random Forest</a></li>	
+					<li><a href="https://www.statsmodels.org/dev/examples/notebooks/generated/statespace_varmax.html">Varmax Model</a></li>					
 		          </ul>
 		        </li>
-		        <li id="menu-comunicacao" ><a href="#"><i class="fa fa-book nav_icon"></i><span>Element</span><span class="fa fa-angle-right" style="float: right"></span></a>
+		        <li id="menu-comunicacao" ><a href="#"><i class="fa fa-book nav_icon"></i><span>Producer</span><span class="fa fa-angle-right" style="float: right"></span></a>
 		          <ul id="menu-comunicacao-sub" >
-		            <li id="menu-mensagens" style="width: 120px" ><a href="buttons.html">Buttons</a>		              
+		            <li id="menu-mensagens" style="width: 120px" ><a href="https://www.linkedin.com/in/lingyuli1988/">Linkedin</a>		              
 		            </li>
-		            <li id="menu-arquivos" ><a href="typography.html">Typography</a></li>
-		            <li id="menu-arquivos" ><a href="icons.html">Icons</a></li>
+		            <li id="menu-arquivos" ><a href="https://github.com/lingyu001/checkin_flask">Github</a></li>
+		            <li id="menu-arquivos" ><a href="https://scholar.google.com/citations?hl=en&user=spSAaLIAAAAJ">Google Scholar</a></li>
 		          </ul>
 		        </li>
 		          <li><a href="maps.html"><i class="fa fa-map-marker"></i><span>Maps</span></a></li>
-		        <li id="menu-academico" ><a href="#"><i class="fa fa-file-text"></i><span>Pages</span><span class="fa fa-angle-right" style="float: right"></span></a>
+		        <li id="menu-academico" ><a href="#"><i class="fa fa-file-text"></i><span>A Poem</span><span class="fa fa-angle-right" style="float: right"></span></a>
 		          <ul id="menu-academico-sub" >
-		          	 <li id="menu-academico-boletim" ><a href="login.html">Login</a></li>
-		            <li id="menu-academico-avaliacoes" ><a href="signup.html">Sign Up</a></li>		           
+		          	 <li id="menu-academico-boletim" ><a href="/blank.html">Read</a></li>
+		            <li id="menu-academico-avaliacoes" ><a href="/signup.html">Leave</a></li>		           
 		          </ul>
 		        </li>
 		        
-		        <li><a href="charts.html"><i class="fa fa-bar-chart"></i><span>Charts</span></a></li>
+		        <li><a href="charts.html"><i class="fa fa-bar-chart"></i><span>To-be-developed</span></a></li>
 		        <li><a href="#"><i class="fa fa-envelope"></i><span>Mailbox</span><span class="fa fa-angle-right" style="float: right"></span></a>
 		        	 <ul id="menu-academico-sub" >
-			            <li id="menu-academico-avaliacoes" ><a href="inbox.html">Inbox</a></li>
-			            <li id="menu-academico-boletim" ><a href="inbox-details.html">Compose email</a></li>
+			            <li id="menu-academico-avaliacoes" ><a href="https://mail.google.com">Inbox</a></li>
+			            <li id="menu-academico-boletim" ><a href="https://mail.google.com">Compose email</a></li>
 		             </ul>
 		        </li>
 		         <li><a href="#"><i class="fa fa-cog"></i><span>System</span><span class="fa fa-angle-right" style="float: right"></span></a>
 		         	 <ul id="menu-academico-sub" >
-			            <li id="menu-academico-avaliacoes" ><a href="404.html">404</a></li>
-			            <li id="menu-academico-boletim" ><a href="blank.html">Blank</a></li>
+			            <li id="menu-academico-avaliacoes" ><a href="/404.html">404</a></li>
+			            <li id="menu-academico-boletim" ><a href="/blank.html">Blank</a></li>
 		             </ul>
 		         </li>
-		         <li><a href="#"><i class="fa fa-shopping-cart"></i><span>E-Commerce</span><span class="fa fa-angle-right" style="float: right"></span></a>
+		         <li><a href="#"><i class="fa fa-shopping-cart"></i><span>To-be-developed</span><span class="fa fa-angle-right" style="float: right"></span></a>
 		         	<ul id="menu-academico-sub" >
 			            <li id="menu-academico-avaliacoes" ><a href="product.html">Product</a></li>
 			            <li id="menu-academico-boletim" ><a href="price.html">Price</a></li>
